@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>In-Class JavaScript</title>
+  </head>
+
+  <body>
+
+    <h1 id="welcome"></h1>
+    <script src="math.js"></script>
+
+
+    <script>
+        //Numbers
+        var myNumber = 42;
+        myNumber = myNumber + 10;
+        console.log(myNumber, myNumber / 2);
+        
+        //Strings
+        var myString = "Javascript is Cool!";
+        console.log("D3 and " + myString)
+        
+        //Booleans
+        var bigNumber = myNumber > 100;
+        console.log(bigNumber);
+
+        //Arrays
+        var myArray = ["Adriana", myNumber, bigNumber, false, 100]
+        console.log(myArray)
+
+        //Object
+        var user = {
+            name: "Adriana",
+            color: "purple",
+            height: 62,
+            cat: "Atti",
+            luckyNumber: myNumber
+        };
+        console.log(user.name)
+
+        //Function
+        var sayHello = function(name) {
+
+            var helloString = "Hello " + name + "!";
+            console.log(helloString);
+            return helloString;
+        }
+        sayHello("Peanut "+ user.name + " " + user.cat);
+
+
+        var fourSquare = squarify(4);
+        var hundred = squarify(100);
+
+        console.log(fourSquare);
+        console.log(hundred);
+
+        //Conditional Statements
+        if (myNumber > 100) {
+            console.log("greater than 10!")
+        }     
+        else if (myNumber > 50) {
+            console.log("bigger than 50!")
+        }
+        else {
+            console.log("too small")
+        };
+
+        //Interacting with DOM
+        var title = document.getElementById("welcome")
+        console.log(title);
+        title.innerHTML = "Welcome " + user.cat + "!";
+
+        
+    
+
+
+    </script>
+  
+</body>
+
+</html>
