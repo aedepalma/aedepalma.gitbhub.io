@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>D3 Basics</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+
+        .big {
+            font-size: 100px;
+        }
+    </style>
+  </head>
+  <body>
+      <h1 id="title">Welcome!</h1>
+
+      <svg id="circleCanvas">
+
+      </svg>
+
+      <script>
+        d3.select("#title")
+          .attr("class","big")
+          .style("color","green");
+
+        var data2010 = [
+            {
+                country: "usa",
+                value: 20
+            },
+            {
+                country: "chn",
+                value: 25
+            },
+            {
+                country: "mex",
+                value: 15
+            }
+        ];
+
+        var data2015 = [
+            {
+                country: "usa",
+                value: 30
+            },
+            {
+                country: "chn",
+                value: 10
+            },
+        ];
+
+        function drawCircles(dataArray) {
+            
+            var circles = d3.select("#circleCanvas")
+            .selectAll("circle")
+            .data(dataArray, function(currentDataPoint) {
+                console.log(currentDataPoint.country);
+                return currentDataPoint.country;
+            });
+            
+            circles
+                .transition()
+                .duration(1000)
+                .attr("cx", function(d){
+                    return d.value * 10;
+                })
+                .attr("fill", "black")
+                .attr("r",function(d){
+                    return d.value;
+                
+                });
+
+            circles.enter().append("circle")
+                .attr("class", "myCircle")
+                .attr("cy", 100)
+                .attr("cx", function(d){
+                    return d.value * 10;
+                })
+                .attr("r", 0)
+                .attr("fill","blue")
+                .transition()
+                .duration(1000)
+                .attr("r",function(d){
+                    return d.value;
+                });
+
+            circles.exit()
+            .transition().duration(1000)
+            .attr("r", 0)
+            .attr("fill","green")
+            .remove();
+        }
+
+            drawCircles(data2010);
+
+      </script>
+
+  </body>
+</html>
