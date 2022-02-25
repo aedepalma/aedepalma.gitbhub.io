@@ -1,31 +1,92 @@
 <!DOCTYPE html>
 <html>
-  <head>
+ 
+<head>
     <meta charset="utf-8" />
     <title>ARTG5330 Homework | Spring 2022</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
   </head>
+  
   <body>
-    <script>
-    
-        var width = 500;
-        var height = 500;
-    
-        //Create SVG element
-        var svg = d3.select("body")
-                .append("svg")
-                .attr("width", width)
-                .attr("height", height);
-    
-        //Create and append rectangle element
-        svg.append("rect")
-                .attr("x", 0)
-                .attr("y", 0)
-                .attr("width", 200)
-                .attr("height", 100)
+    <h1 id="title">Welcome!</h1>
+    <a href="/index.html">Back to Home</a>
+    <svg id="rectCanvas"></svg> 
+
+     <script>
+        // Data
+        var data2010 = [
+            {
+                country: "usa",
+                value: 20
+            },
+            {
+                country: "chn",
+                value: 25
+            },
+            {
+                country: "mex",
+                value: 15
+            }
+        ];
+
+        var data2015 = [
+            {
+                country: "usa",
+                value: 30
+            },
+            {
+                country: "chn",
+                value: 10
+            },
+        ];
+
+        function drawRect(dataArray) {
+            
+            var rect = d3.select("#rectCanvas")
+            .selectAll("rect")
+            .data(dataArray, function(currentDataPoint) {
+                console.log(currentDataPoint.country);
+                return currentDataPoint.country;
+            });
+            
+            rect
+                .transition()
+                .duration(1000)
+                .attr("x", function(d){
+                    return d.value;
+                })
+                .attr("height", function(d){
+                    return d.value * 20;
+                })
+                .attr("width", function(d){
+                    return d.value * 20;
+                })
+                .attr("fill", "black")
+                ;
+
+            rect.enter().append("rect")
+                .attr("class", "myRect")
+                .attr("x", function(d){
+                    return d.value * 10;
+                })
+                .attr("height", function(d){
+                    return d.value;
+                })
+                .attr("width", function(d){
+                    return d.value;
+                })
+                .attr("fill","blue")
+                .transition()
+                .duration(1000)
+
+            rect.exit()
+            .transition().duration(1000)
+            .attr("height", 0)
+            .attr("fill","green")
+            .remove();
+        }
+        drawRect(data2010);
+
     </script>
     </body>
 </html>
-
-
-
-
