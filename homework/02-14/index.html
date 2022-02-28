@@ -57,13 +57,13 @@
                 .transition()
                 .duration(1000)
                 .attr("x", function(d){
-                    return d.value;
+                    return d.value * 5;
                 })
                 .attr("height", function(d){
-                    return d.value * 20;
+                    return d.value;
                 })
                 .attr("width", function(d){
-                    return d.value * 20;
+                    return d.value;
                 })
                 .attr("fill", "black")
                 ;
