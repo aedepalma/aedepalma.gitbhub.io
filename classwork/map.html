@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>World Map</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/topojson@3"></script>
+  </head>
+ 
+  <body>
+    <h1>World Map</h1>
+    <svg id="viz">
+        <rect id="ocean" fill="#7393B3"/>
+        <g id="map"></g>
+      </svg>
+
+    <script>
+        var width = window.innerWidth;
+        var height = window.innerHeight;
+
+        var svg = d3.select("#viz")
+        .attr("width", width)
+        .attr("height", height);
+
+        svg.select("#ocean")
+            .attr("width", width)
+            .attr("height", height);
+
+        var map = svg.select("#map");
+
+        d3.json("world-alpha3.json")
+        .then(function(world) {
+            
+            console.log(world);
+            var geoJSON = topojson.feature(world, world.objects.countries);
+            
+            geoJSON.features = geoJSON.features.filter(function(d) {
+                return d.id !== "ATA";
+            });
+            
+            console.log(geoJSON);
+
+            var proj = d3.geoMercator()
+                .fitSize([width, height], geoJSON);
+            
+            var path = d3.geoPath()
+                .projection(proj);
+            
+            var countries = map.selectAll("path")
+                .data(geoJSON.features);
+
+            countries.enter().append("path")
+                .attr("d", path)
+                .attr("fill", "#008080")
+                .style("stroke", "#7393B3")
+            
+            var points = [
+                {"name": "Boston", "coords": [-71.0589, 42.3601]},
+                {"name": "London", "coords": [-0.1278, 51.5074]}
+            ];
+
+            var dots = map.selectAll("circle")
+                .data(points);
+
+            dots.enter().append("circle")
+                .attr("transform", function(d){
+                return "translate(" + proj(d.coords) + ")";
+            })
+                .attr("r", 3.5)
+                .style("fill", "white")
+                .style("stroke", "black")
+
+            var zoom = d3.zoom()
+                .translateExtent([
+                    [0, 0], [width, height]
+                ])
+                .scaleExtent([1, 8])
+                .on("zoom", zoomed);
+            
+            function zoomed (event) {
+                map.attr("transform", event.transform);
+            }
+
+            svg.call(zoom);
+        
+        });
+
+    </script>
+  </body>
+</html>
