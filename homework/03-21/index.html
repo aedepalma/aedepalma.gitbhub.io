@@ -131,6 +131,8 @@
                 return x(i + 1);
               })
               .style("fill", "white")
+              .attr('stroke', '#355E3B')
+              .attr('stroke-dasharray', '10,10')
               .call(barPosition);
 
             // Exiting Bars
