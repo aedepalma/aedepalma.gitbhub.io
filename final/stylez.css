@@ -11,7 +11,7 @@ body {
     background-color: black;
     padding: 20vh 25px;
     background-image: url("https://i.ibb.co/dbzq7KM/atticus.jpg");
-    background-position: center;
+    background-position: 50% 100%;
     background-size: cover;
     text-align: center;
     color: #FFFFFF
@@ -24,6 +24,7 @@ h1 {
 
 .section {
   display: flex;
+  flex-direction: row;
   padding: 25px;
 }
 
@@ -37,6 +38,14 @@ h1 {
   height: 300px;
   margin: 20px;
 }
+
+#tooltip {
+    background-color: white;
+    border: 1px solid black;
+    display: none;
+    padding: 5px;
+    position: absolute;
+  }
 
 @media (max-width: 600px) {
     .section {
