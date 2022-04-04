@@ -2,88 +2,35 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>World Map</title>
+    <link rel="stylesheet" href="/final/style.css" />
+    <title>Rent Prices in the United States</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://unpkg.com/topojson@3"></script>
   </head>
  
   <body>
-    <h1>World Map</h1>
-    <svg id="viz">
-        <rect id="ocean" fill="#7393B3"/>
-        <g id="map"></g>
-      </svg>
-
-    <script>
-        var width = window.innerWidth;
-        var height = window.innerHeight;
-
-        var svg = d3.select("#viz")
-        .attr("width", width)
-        .attr("height", height);
-
-        svg.select("#ocean")
-            .attr("width", width)
-            .attr("height", height);
-
-        var map = svg.select("#map");
-
-        d3.json("usa.json")
-        .then(function(usa) {
-            
-            console.log(usa);
-            var geoJSON = topojson.feature(usa, usa.objects.states);
-            
-            geoJSON.features = geoJSON.features.filter(function(d) {
-                return d.id !== "ATA";
-            });
-            
-            console.log(geoJSON);
-
-            var proj = d3.geoAlbersUsa()
-                .fitSize([width, height], geoJSON);
-            
-            var path = d3.geoPath()
-                .projection(proj);
-            
-            var states = map.selectAll("path")
-                .data(geoJSON.features);
-
-            states.enter().append("path")
-                .attr("d", path)
-                .attr("fill", "#008080")
-                .style("stroke", "#7393B3")
-            
-            var points = [
-                {"name": "Boston", "coords": [-71.0589, 42.3601]}
-            ];
-
-            var dots = map.selectAll("circle")
-                .data(points);
-
-            dots.enter().append("circle")
-                .attr("transform", function(d){
-                return "translate(" + proj(d.coords) + ")";
-            })
-                .attr("r", 3.5)
-                .style("fill", "white")
-                .style("stroke", "black")
-
-            var zoom = d3.zoom()
-                .translateExtent([
-                    [0, 0], [width, height]
-                ])
-                .scaleExtent([1, 8])
-                .on("zoom", zoomed);
-            
-            function zoomed (event) {
-                map.attr("transform", event.transform);
-            }
-
-            svg.call(zoom);
+    <h1>Rent Prices in the United States</h1>
+    
+    <div class="section">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eleifend egestas aliquet. 
+            Suspendisse non felis sed felis pellentesque convallis quis eget arcu. Aliquam eget dolor commodo eros rhoncus egestas. 
+            Nullam dapibus eget diam nec accumsan. Fusce tincidunt augue a libero semper vulputate. 
+            Fusce vel metus sit amet dolor pulvinar varius sit amet vehicula nibh. Sed ultricies interdum tellus, in varius augue eleifend vel.</p>
         
-        });
+        <svg id="viz">
+            <g id="map"></g>
+        </svg>
+    
+    </div>
+    
 
-    </script>
-  </body>
+      <div id="tooltip">
+          City: <span id="city"></span>
+          <br/>
+          Rent: $<span id="rent"></span>
+      </div>
+
+    <script src="/final/map.js"></script>
+</body>
+
 </html>
