@@ -1,37 +1,49 @@
 h1 {
-  font-family: 'Bebas Neue';
-  font-size:48px; 
-  text-align: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size:100px; 
+  padding-left: 25px;
+  padding-bottom: 0px;
+  text-align: left;
+  line-height: 10px;
+}
+
+h2 {
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  font-size:32px;
+  font-weight: 800;
+  text-align: left;
 }
 
 body {
     margin: 0;
-    font-family:'Open Sans', 'Gill Sans MT','Trebuchet MS', sans-serif;
+    font-family:'Montserrat','Open Sans','Trebuchet MS', sans-serif;
     font-size: 18px;
+    font-weight: 200;
     color: #000000;
-    background-color:#A9A9A9;
+    background-color:#FFFFFF;
     margin-left: 20px; 
 }
 
 .section {
   display: flex;
   flex-direction: row;
-  padding: 25px;
+  padding-left: 25px;
+  padding-top: 0px;
 }
 
 .interact {
     border: 1px dotted #000000;
     flex: 1;
-    height: 300px;
-    width: 50px;
-    margin: 20px;
+    height: 600px;
+    width: 20px;
+    margin: 5px;
   }
 
 .section svg {
-  border: 1px dotted #000000;
   flex: 2;
   height: 600px;
-  margin: 20px;
+  margin: 10px;
 }
 
 

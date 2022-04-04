@@ -31,7 +31,7 @@ var states = map.selectAll("path")
     states.enter().append("path")
         .attr("d", path)
         .attr("fill", "#008080")
-        .style("stroke", "#A9A9A9")
+        .style("stroke", "#FFFFFF")
             
 var points = [
     {"name": "Boston", "coords": [-71.0589, 42.3601]}
