@@ -1,5 +1,5 @@
-var width = 700;
-var height = 300;
+var width = 800;
+var height = 600;
 
 var svg = d3.select("#viz")
     .attr("width", width)

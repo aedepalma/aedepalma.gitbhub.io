@@ -10,17 +10,55 @@
  
   <body>
     <h1>Rent Prices in the United States</h1>
-    
+
     <div class="section">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eleifend egestas aliquet. 
-            Suspendisse non felis sed felis pellentesque convallis quis eget arcu. Aliquam eget dolor commodo eros rhoncus egestas. 
-            Nullam dapibus eget diam nec accumsan. Fusce tincidunt augue a libero semper vulputate. 
-            Fusce vel metus sit amet dolor pulvinar varius sit amet vehicula nibh. Sed ultricies interdum tellus, in varius augue eleifend vel.</p>
+        <div class="interact">
+            <h2>Explore this Map</h2>
+            <p>Select Data Range</p>
+                <button type="button">Yearly</button>
+                <button type="button">Monthly</button>
+            <p>Select Year</p>
+                <div class="slidecontainer">
+                    <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+                  </div>
+            <p>Select Month</p>
+                <select id="month" name="month">
+                    <option>month</option>
+                    <option value="01">January</option>
+                    <option value="02">February</option>
+                    <option value="03">March</option>
+                    <option value="04">April</option>
+                    <option value="05">May</option>
+                    <option value="06">June</option>
+                    <option value="07">July</option>
+                    <option value="08">August</option>
+                    <option value="09">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
         
+                <select id="year" name="year">
+                    <option>year</option>
+                    <option value="2014">2014</option>
+                    <option value="2015">2015</option>
+                    <option value="2016">2016</option>
+                    <option value="2017">2017</option>
+                    <option value="2018">2018</option>
+                    <option value="2019">2019</option>
+                    <option value="2020">2020</option>
+                    <option value="2021">2021</option>
+                </select>
+        </div>
         <svg id="viz">
             <g id="map"></g>
         </svg>
+    </div>
     
+   
+    
+    <div class="section">
+        <p>Zillow Observed Rent Index (ZORI): A smoothed measure of the typical observed market rate rent across a given region. ZORI is a repeat-rent index that is weighted to the rental housing stock to ensure representativeness across the entire market, not just those homes currently listed for-rent. The index is dollar-denominated by computing the mean of listed rents that fall into the 40th to 60th percentile range for all homes and apartments in a given region, which is once again weighted to reflect the rental housing stock.</p>
     </div>
     
 

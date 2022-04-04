@@ -9,7 +9,7 @@ body {
 
 h1 {
     font-size:48px; 
-    text-align: center;
+    text-align: left;
 }
 
 .section {
@@ -18,16 +18,21 @@ h1 {
   padding: 25px;
 }
 
-.section p {
-  flex: 1;
-}
+.interact {
+    border: 1px dotted #000000;
+    flex: 1;
+    height: 300px;
+    width: 50px;
+    margin: 20px;
+  }
 
 .section svg {
   border: 1px dotted #000000;
   flex: 2;
-  height: 400px;
+  height: 600px;
   margin: 20px;
 }
+
 
 #tooltip {
     background-color: white;
