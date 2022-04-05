@@ -62,4 +62,7 @@ body {
     .section svg {
       flex: none;
     }
+    h1 {
+      font-size:70px; 
+    }
   }
