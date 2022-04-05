@@ -9,6 +9,11 @@
         margin: 0;
       }
 
+      #scaleRect {
+        stroke: black;
+      }
+
+</style>
     </style>
   </head>
   <body>
@@ -21,6 +26,7 @@
           <g id="shapes"></g>
           <g id="x"></g>
           <g id="y"></g>
+          <g id="legend"></g>
           <g id="scale">
             <rect id="scaleRect" fill="url(#colorGradient)" />
             <g id="scaleAxis"></g>
@@ -49,21 +55,29 @@
         .attr("width", width)
         .attr("height", height);
 
-        var scaleWidth = 300;
-        var scaleHeight = 40;
-        var scaleX = margin.left + chartWidth / 2 - (scaleWidth / 2);
-        var scaleY = margin.top + chartHeight + 20;
+      var scaleWidth = 300;
+      var scaleHeight = 40;
+      var scaleX = margin.left + chartWidth / 2 - (scaleWidth / 2);
+      var scaleY = margin.top + chartHeight + 20;
 
-        var scale = svg.select("#scale")
-            .attr("transform", "translate(" + scaleX + ", " + scaleY + ")");
+      var scale = svg.select("#scale")
+          .attr("transform", "translate(" + scaleX + ", " + scaleY + ")");
 
         scale.select("#scaleRect")
             .attr("width", scaleWidth)
             .attr("height", scaleHeight);
 
-        var margin = {
+      var legendX = margin.left + chartWidth;
+      var legendY = margin.top;
+
+      var legend = svg.select("#legend")
+          .attr("transform", "translate(" + legendX + ", " + legendY + ")");
+      
+      var legendSize = 20;
+
+      var margin = {
          top: 20,
-         right: 20,
+         right: 75,
          bottom: 100,
          left: 40
         };
@@ -89,6 +103,19 @@
             });
 
             if (data.length > dataMax) data.pop();
+
+            var legendData = data.map(function (d){
+              return d.users;
+            })
+
+            legendData = legendData.filter(function (d,i){
+              return legendData.indexOf(d) === i;
+            })
+              .sort(function(a, b) {
+                return b - a;
+            });
+
+            console.log(legendData);
 
             var maxUsers = d3.max(data, function(d) {
               return d.users;
@@ -131,6 +158,35 @@
 
                     });
 
+            var legendRects = legend.selectAll("rect")
+              .data(legendData);
+
+            var legendEnters = legendRects.enter().append("rect");
+
+            legendRects.merge(legendEnters)
+                .attr("x", 0)
+                .attr("y", function(d, i) {
+                  return i * legendSize + i * 10;
+                })
+                .attr("fill", barColor)
+                .attr("width", legendSize)
+                .attr("height", legendSize);
+
+            var legendTexts = legend.selectAll("text")
+            .data(legendData);
+
+            var legendTextsEnter = legendTexts.enter().append("text")
+              .attr("baseline-shift", "-100%");
+
+            legendTexts.merge(legendTextsEnter)
+              .attr("x", legendSize + 5)
+              .attr("y", function(d, i) {
+                return i * legendSize + i * 10;
+                })
+              .text(function(d) {
+                return d;
+              });
+
             var yAxis = d3.axisLeft(y);
             svg.select("#y")
               .attr("transform", "translate(" + margin.left + ", 0)")
@@ -142,8 +198,9 @@
               .attr("transform", "translate(0, " + (chartHeight + margin.top) + ")")
               .transition().duration(frequency / 2)
               .call(xAxis);
-
-            function zeroState(selection) {
+            
+            
+              function zeroState(selection) {
               selection
                 .attr("height", 0)
                 .attr("y", y(0));
