@@ -43,16 +43,16 @@ d3.csv("/final/Zillow Rent.csv")
     })
 
 //circles
-svg.selectAll(".city-circle")
-    .data(csvData)
-    .enter().append("circle")
-    .attr("r", 2)
-    .attr("cx", function(d){
-        var coords = projection ([d.Coords])
-            console.log(coords)
-            return 10;
-    })
-    .attr("cy", 10)
+var dots = map.selectAll("circle")
+                .data(csvData);
+
+            dots.enter().append("circle")
+                .attr("transform", function(d){
+                return "translate(" + proj(d.coords) + ")";
+            })
+                .attr("r", 3.5)
+                .style("fill", "white")
+                .style("stroke", "black")
 
 //zoom
 var zoom = d3.zoom()
