@@ -13,18 +13,15 @@ var map = svg.select("#map");
     d3.csv("/final/Zillow Rent.csv")
     .then(function(csvData){
     console.log(csvData)
+   
     //circles
-
     var dots = map.selectAll("circle")
-                .data(csvData);
-
-            dots.enter().append("circle")
-                .attr("transform", function(d){
-                return "translate(" + proj(d.coords) + ")";
-            })
-                .attr("r", 3.5)
-                .style("fill", "white")
-                .style("stroke", "black")
+        .data(csvData);
+        
+        dots.enter().append("circle")
+        .attr("r", 3.5)
+        .style("fill", "white")
+        .style("stroke", "black")
 
 
     })
