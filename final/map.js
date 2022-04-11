@@ -46,13 +46,13 @@ d3.csv("/final/Zillow Rent.csv")
 var dots = map.selectAll("circle")
                 .data(csvData);
 
-            dots.enter().append("circle")
-                .attr("transform", function(d){
-                return "translate(" + proj(d.coords) + ")";
+    dots.enter().append("circle")
+        .attr("transform", function(d){
+            return "translate(" + proj(d.coords) + ")";
             })
-                .attr("r", 3.5)
-                .style("fill", "white")
-                .style("stroke", "black")
+        .attr("r", 3.5)
+        .style("fill", "white")
+        .style("stroke", "black")
 
 //zoom
 var zoom = d3.zoom()
