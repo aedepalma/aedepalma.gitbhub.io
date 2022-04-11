@@ -10,18 +10,18 @@ var map = svg.select("#map");
     d3.json("usa.json")
     .then(function(usa) {
 
-    d3.csv("/final/Zillow Rent.csv")
-    .then(function(csvData){
-    console.log(csvData)
-   
-    //circles
-    var dots = map.selectAll("circle")
-        .data(csvData);
-        
-        dots.enter().append("circle")
-        .attr("r", 3.5)
-        .style("fill", "white")
-        .style("stroke", "black")
+        d3.csv("/final/Zillow Rent.csv")
+            .then(function (csvData) {
+                console.log(csvData)
+
+                //circles
+                var dots = map.selectAll("circle")
+                    .data(csvData);
+
+                dots.enter().append("circle")
+                    .attr("r", 3.5)
+                    .style("fill", "white")
+                    .style("stroke", "black")
 
 
     })
