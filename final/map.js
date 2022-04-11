@@ -33,6 +33,13 @@ var states = map.selectAll("path")
         .attr("fill", "#008080")
         .style("stroke", "#FFFFFF")
             
+d3.csv("/final/Zillow Rent.csv")
+        .then(function(csvData){
+          
+        console.log(csvData);
+    })
+    
+
 var points = [
     {"name": "Boston", "coords": [-71.0589, 42.3601]}
     ];
