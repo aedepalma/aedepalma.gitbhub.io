@@ -32,29 +32,29 @@ var states = map.selectAll("path")
         .attr("d", path)
         .attr("fill", "#008080")
         .style("stroke", "#FFFFFF")
-            
+        .on('click', function(d){
+            d3.select(this).classed("selected", true)
+        })
+
+//data           
 d3.csv("/final/Zillow Rent.csv")
         .then(function(csvData){
-          
-        console.log(csvData);
+        console.log(csvData)
     })
-    
 
-var points = [
-    {"name": "Boston", "coords": [-71.0589, 42.3601]}
-    ];
+//circles
+svg.selectAll(".city-circle")
+    .data(csvData)
+    .enter().append("circle")
+    .attr("r", 2)
+    .attr("cx", function(d){
+        var coords = projection ([d.Coords])
+            console.log(coords)
+            return 10;
+    })
+    .attr("cy", 10)
 
-var dots = map.selectAll("circle")
-    .data(points);
-
-    dots.enter().append("circle")
-        .attr("transform", function(d){
-            return "translate(" + proj(d.coords) + ")";
-            })
-        .attr("r", 3.5)
-        .style("fill", "white")
-        .style("stroke", "black")
-
+//zoom
 var zoom = d3.zoom()
     .translateExtent([
         [0, 0], [width, height]
@@ -68,7 +68,6 @@ var zoom = d3.zoom()
 
 svg.call(zoom);
 
-
 d3.select("#viz")
   .on("mousemove", function(event) {
     
@@ -80,11 +79,14 @@ d3.select("#viz")
     tooltip.select("#city").html("Boston, MA")
     tooltip.select("#rent").html("2,700")
 
-  })
-  .on("mouseout", function() {
+})
+
+    .on("mouseout", function() {
     d3.select("#tooltip")
       .style("display", "none");
 
-  });
+});
+
+
         
 });

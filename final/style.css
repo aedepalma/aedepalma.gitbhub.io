@@ -46,6 +46,10 @@ body {
   margin: 10px;
 }
 
+.selected {
+  fill: blue;
+}
+
 
 #tooltip {
     background-color: white;
