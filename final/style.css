@@ -4,7 +4,7 @@ h1 {
   padding-left: 25px;
   padding-bottom: 0px;
   text-align: left;
-  line-height: 10px;
+  line-height: 100%;
 }
 
 h2 {
@@ -67,6 +67,7 @@ body {
       flex: none;
     }
     h1 {
-      font-size:70px; 
+      font-size:60px; 
+      line-height: 100%;
     }
   }

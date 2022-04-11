@@ -36,39 +36,45 @@ var map = svg.select("#map");
                     .attr("d", path)
                     .attr("fill", "#008080")
                     .style("stroke", "#FFFFFF")
-                    .on('click', function (d) {
-                        d3.select(this).classed("selected", true)
-                    })
+
 
                 //circles
-            
+
                 var dots = map.selectAll("circle")
                     .data(csvData);
 
+                dots
+                    .transition() 
+                    .duration(1000)
+                    .attr("cx", 0)
+                    .attr("cy", 0)
+
                 dots.enter().append("circle")
-                    .style("fill", "white")
-                    .style("stroke", "black")
-                    .attr("r",function(d){
-                        return d['2014-01' * 0.8]
+                    .attr("r", function (d) {
+                        return d['2016-01'] * 0.00825
                     })
-                    .attr("cx", function(d){
+                    .attr("cx", function (d) {
                         var coords = proj([d.long, d.lat])
-                            return coords[0];
-                        })
+                        return coords[0];
+                    })
                     .attr("cy", function (d) {
                         var coords = proj([d.long, d.lat])
-                            return coords[1];
-                        })
+                        return coords[1];
                     })
-                    
+                    .transition()
+                    .duration(1000)
+                    .style("stroke", "black")
+                    .style("fill", function (d) {
+                        if (d['2016-01'] < 1200)
+                            return "#ACC2D8"
+                        else if (d['2016-01'] < 2300)
+                            return "white"
+                    })
 
 
+            })
     })
             
-
-
-
-
 //zoom
 var zoom = d3.zoom()
     .translateExtent([
