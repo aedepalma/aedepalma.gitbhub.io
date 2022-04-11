@@ -48,7 +48,9 @@ var map = svg.select("#map");
                 dots.enter().append("circle")
                     .style("fill", "white")
                     .style("stroke", "black")
-                    .attr("r", 5)
+                    .attr("r",function(d){
+                        return d['2014-01' * 0.8]
+                    })
                     .attr("cx", function(d){
                         var coords = proj([d.long, d.lat])
                             return coords[0];
