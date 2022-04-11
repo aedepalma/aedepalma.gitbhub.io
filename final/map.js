@@ -9,48 +9,62 @@ var map = svg.select("#map");
 
     d3.json("usa.json")
     .then(function(usa) {
+        console.log(usa);
 
         d3.csv("/final/Zillow Rent.csv")
             .then(function (csvData) {
                 console.log(csvData)
+                
+                //projection
+                var geoJSON = topojson.feature(usa, usa.objects.states);
+                geoJSON.features = geoJSON.features.filter(function (d) {
+                    return d.id !== "ATA";
+                });
+
+                console.log(geoJSON);
+
+                var proj = d3.geoAlbersUsa()
+                    .fitSize([width, height], geoJSON);
+
+                var path = d3.geoPath()
+                    .projection(proj);
+
+                var states = map.selectAll("path")
+                    .data(geoJSON.features);
+
+                states.enter().append("path")
+                    .attr("d", path)
+                    .attr("fill", "#008080")
+                    .style("stroke", "#FFFFFF")
+                    .on('click', function (d) {
+                        d3.select(this).classed("selected", true)
+                    })
 
                 //circles
+            
                 var dots = map.selectAll("circle")
                     .data(csvData);
 
                 dots.enter().append("circle")
-                    .attr("r", 3.5)
                     .style("fill", "white")
                     .style("stroke", "black")
+                    .attr("r", 5)
+                    .attr("cx", function(d){
+                        var coords = proj([d.long, d.lat])
+                            return coords[0];
+                        })
+                    .attr("cy", function (d) {
+                        var coords = proj([d.long, d.lat])
+                            return coords[1];
+                        })
+                    })
+                    
 
 
     })
             
-    console.log(usa);
 
-var geoJSON = topojson.feature(usa, usa.objects.states);
-    geoJSON.features = geoJSON.features.filter(function(d) {
-        return d.id !== "ATA";
-    });
-            
-    console.log(geoJSON);
 
-var proj = d3.geoAlbersUsa()
-    .fitSize([width, height], geoJSON);
-            
-var path = d3.geoPath()
-    .projection(proj);
-            
-var states = map.selectAll("path")
-    .data(geoJSON.features);
-
-    states.enter().append("path")
-        .attr("d", path)
-        .attr("fill", "#008080")
-        .style("stroke", "#FFFFFF")
-        .on('click', function(d){
-            d3.select(this).classed("selected", true)
-        })
 
 
 //zoom
@@ -87,5 +101,4 @@ d3.select("#viz")
 });
 
 
-  //leave alone      
-});
+ 
