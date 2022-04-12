@@ -7,14 +7,14 @@ var svg = d3.select("#viz")
 
 var map = svg.select("#map");
 
-    d3.json("usa.json")
-    .then(function(usa) {
+d3.json("usa.json")
+    .then(function (usa) {
         console.log(usa);
 
         d3.csv("/final/Zillow Rent.csv")
             .then(function (csvData) {
                 console.log(csvData)
-                
+
                 //projection
                 var geoJSON = topojson.feature(usa, usa.objects.states);
                 geoJSON.features = geoJSON.features.filter(function (d) {
@@ -41,7 +41,7 @@ var map = svg.select("#map");
                 d3.select("#map")
                     .data(csvData)
                     .on("mousemove", function (event) {
-                        
+
                         var tooltip = d3.select("#tooltip")
                             .data(csvData)
                             .style("display", "block")
@@ -49,14 +49,14 @@ var map = svg.select("#map");
                             .style("left", event.pageX + 10 + "px")
                             .html("City: " + d.RegionName)
                             .html("Rent: " + "$" + d['2016-01'])
-                            })
-                    
-                    
+                    })
+
+
                     .on("mouseout", function () {
                         d3.select("#tooltip")
                             .style("display", "none");
                     });
-            
+
 
                 //circles
 
@@ -64,7 +64,7 @@ var map = svg.select("#map");
                     .data(csvData);
 
                 dots
-                    .transition() 
+                    .transition()
                     .duration(1000)
                     .attr("cx", 0)
                     .attr("cy", 0)
@@ -90,12 +90,12 @@ var map = svg.select("#map");
                         else if (d['2016-01'] < 2300)
                             return "white"
                     })
-                
-    
+
+
 
             })
     })
-            
+
 //zoom
 var zoom = d3.zoom()
     .translateExtent([
@@ -113,4 +113,4 @@ svg.call(zoom);
 
 
 
- 
+
