@@ -37,6 +37,26 @@ var map = svg.select("#map");
                     .attr("fill", "#008080")
                     .style("stroke", "#FFFFFF")
 
+                //tooltip
+                d3.select("#map")
+                    .data(csvData)
+                    .on("mousemove", function (event) {
+                        
+                        var tooltip = d3.select("#tooltip")
+                            .data(csvData)
+                            .style("display", "block")
+                            .style("top", event.pageY + 10 + "px")
+                            .style("left", event.pageX + 10 + "px")
+                            .html("City: " + d.RegionName)
+                            .html("Rent: " + "$" + d['2016-01'])
+                            })
+                    
+                    
+                    .on("mouseout", function () {
+                        d3.select("#tooltip")
+                            .style("display", "none");
+                    });
+            
 
                 //circles
 
@@ -50,6 +70,7 @@ var map = svg.select("#map");
                     .attr("cy", 0)
 
                 dots.enter().append("circle")
+                    .attr("class", "dots")
                     .attr("r", function (d) {
                         return d['2016-01'] * 0.00825
                     })
@@ -63,14 +84,14 @@ var map = svg.select("#map");
                     })
                     .transition()
                     .duration(1000)
-                    .style("stroke", "black")
                     .style("fill", function (d) {
                         if (d['2016-01'] < 1200)
                             return "#ACC2D8"
                         else if (d['2016-01'] < 2300)
                             return "white"
                     })
-
+                
+    
 
             })
     })
@@ -79,34 +100,17 @@ var map = svg.select("#map");
 var zoom = d3.zoom()
     .translateExtent([
         [0, 0], [width, height]
-         ])
+    ])
     .scaleExtent([1, 8])
     .on("zoom", zoomed);
-            
-    function zoomed (event) {
+
+function zoomed(event) {
     map.attr("transform", event.transform);
-    }
+}
 
 svg.call(zoom);
 
-d3.select("#viz")
-  .on("mousemove", function(event) {
-    
-    var tooltip = d3.select("#tooltip")
-        .style("display", "block")
-        .style("top", event.pageY + 10 + "px")
-        .style("left", event.pageX + 10 + "px")
 
-    tooltip.select("#city").html("Boston, MA")
-    tooltip.select("#rent").html("2,700")
-
-})
-
-    .on("mouseout", function() {
-    d3.select("#tooltip")
-      .style("display", "none");
-
-});
 
 
  

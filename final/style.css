@@ -50,6 +50,12 @@ body {
   fill: blue;
 }
 
+.dots {
+  stroke: black;
+}
+.dots:hover {
+  stroke: red;
+}
 
 #tooltip {
     background-color: white;
