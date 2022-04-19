@@ -47,8 +47,9 @@ d3.json("usa.json")
                             .style("display", "block")
                             .style("top", event.pageY + 10 + "px")
                             .style("left", event.pageX + 10 + "px")
-                            .html("City: " + d.RegionName)
+                            .html("City: " + d.city)
                             .html("Rent: " + "$" + d['2016-01'])
+                            
                     })
 
 
@@ -69,7 +70,7 @@ d3.json("usa.json")
                     .attr("cx", 0)
                     .attr("cy", 0)
 
-                dots.enter().append("circle")
+                var dotEnter = dots.enter().append("circle")
                     .attr("class", "dots")
                     .attr("r", function (d) {
                         return d['2016-01'] * 0.00825
@@ -89,7 +90,23 @@ d3.json("usa.json")
                             return "#ACC2D8"
                         else if (d['2016-01'] < 2300)
                             return "white"
+                    });
+
+                dots.merge(dotEnter)
+                    .on("mousemove", function (event, d) {
+                        console.log("tooltip data:", d);
+                        var tooltip = d3.select("#tooltip")
+                            .data(csvData)
+                            .style("display", "block")
+                            .style("top", event.pageY + 10 + "px")
+                            .style("left", event.pageX + 10 + "px")
+                            .html("City: " + d.RegionName)
+                            .html("Rent: " + "$" + d['2016-01'])
                     })
+                    .on("mouseout", function () {
+                        d3.select("#tooltip")
+                            .style("display", "none");
+                    });
 
 
 
