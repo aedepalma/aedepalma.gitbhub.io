@@ -13,7 +13,6 @@ d3.json("usa.json")
 
         d3.csv("/final/Zillow Rent.csv")
             .then(function (csvData) {
-                console.log(csvData)
 
                 //projection
                 var geoJSON = topojson.feature(usa, usa.objects.states);
@@ -37,26 +36,6 @@ d3.json("usa.json")
                     .attr("fill", "#008080")
                     .style("stroke", "#FFFFFF")
 
-                //tooltip
-                d3.select("#map")
-                    .data(csvData)
-                    .on("mousemove", function (event) {
-
-                        var tooltip = d3.select("#tooltip")
-                            .data(csvData)
-                            .style("display", "block")
-                            .style("top", event.pageY + 10 + "px")
-                            .style("left", event.pageX + 10 + "px")
-                            .html("City: " + d.city)
-                            .html("Rent: " + "$" + d['2016-01'])
-                            
-                    })
-
-
-                    .on("mouseout", function () {
-                        d3.select("#tooltip")
-                            .style("display", "none");
-                    });
 
 
                 //circles
@@ -100,7 +79,7 @@ d3.json("usa.json")
                             .style("display", "block")
                             .style("top", event.pageY + 10 + "px")
                             .style("left", event.pageX + 10 + "px")
-                            .html("City: " + d.RegionName)
+                            .html("City: " + d.city)
                             .html("Rent: " + "$" + d['2016-01'])
                     })
                     .on("mouseout", function () {
