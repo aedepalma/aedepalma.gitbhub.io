@@ -79,7 +79,7 @@ d3.json("usa.json")
                             .style("display", "block")
                             .style("top", event.pageY + 10 + "px")
                             .style("left", event.pageX + 10 + "px")
-                            .html("City: " + d.RegionName + "<br />Rent: $" + d['2016-01'])
+                            .html("City: " + d.city + "<br />Rent: $" + d['2016-01'])
                     })
                     .on("mouseout", function () {
                         d3.select("#tooltip")
