@@ -46,10 +46,6 @@ body {
   margin: 10px;
 }
 
-.selected {
-  fill: blue;
-}
-
 .dots {
   stroke: black;
 }
