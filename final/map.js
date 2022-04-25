@@ -46,33 +46,12 @@ d3.json("usa.json")
                     var dots = map.selectAll("circle")
                         .data(csvData);
 
-                    dots
-                        .transition()
-                        .duration(1000)
-                        .attr("cx", 0)
-                        .attr("cy", 0)
-
                     var dotEnter = dots.enter().append("circle")
                         .attr("class", "dots")
-                        .attr("r", function (d) {
-                            return d[year + '-01'] * 0.00825
-                        })
-                        .attr("cx", function (d) {
-                            var coords = proj([d.long, d.lat])
-                            return coords[0];
-                        })
-                        .attr("cy", function (d) {
-                            var coords = proj([d.long, d.lat])
-                            return coords[1];
-                        })
-                        .transition()
-                        .duration(1000)
-                        .style("fill", function (d) {
-                            if (d[year + '-01'] < 1500)
-                                return "#84CBCB"
-                            else if (d[year + '-01'] < 2300)
-                                return "#008080"
-                        });
+                        .attr("cx", 0)
+                        .attr("cy", 0)
+                        .attr("r", 0);
+                        
 
                     dots.merge(dotEnter)
                         .on("mousemove", function (event, d) {
@@ -86,6 +65,24 @@ d3.json("usa.json")
                         .on("mouseout", function () {
                             d3.select("#tooltip")
                                 .style("display", "none");
+                        })
+                        .transition().duration(1000)
+                        .attr("r", function (d) {
+                            return d[year + '-01'] * 0.00825
+                        })
+                        .attr("cx", function (d) {
+                            var coords = proj([d.long, d.lat])
+                            return coords[0];
+                        })
+                        .attr("cy", function (d) {
+                            var coords = proj([d.long, d.lat])
+                            return coords[1];
+                        })
+                        .style("fill", function (d) {
+                            if (d[year + '-01'] < 1500)
+                                return "#84CBCB"
+                            else if (d[year + '-01'] < 2300)
+                                return "#008080"
                         });
                 }
 
