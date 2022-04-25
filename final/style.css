@@ -26,6 +26,21 @@ body {
     margin-left: 20px; 
 }
 
+a{
+  color: #008080;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+a:hover {
+  color: white;
+  background-color:#008080;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  font-weight: bold;
+}
+
 .section {
   display: flex;
   flex-direction: row;
@@ -40,7 +55,6 @@ body {
     padding-left: 20px;
     padding-right: 20px;
     margin: 5px;
-    cursor: pointer;
   }
 
 .square1 {
@@ -84,7 +98,7 @@ body {
     color: white;
   }
 
-  .button:active {
+  .button:focus {
     background-color: black;
     color: white;
   }
@@ -95,8 +109,13 @@ body {
   margin: 10px;
 }
 
-.dots:hover {
-  stroke: red;
+.dots {
+  opacity: 0.75;
+}
+
+  .dots:hover {
+    opacity: 1;
+    stroke: red;
 }
 
 #tooltip {
