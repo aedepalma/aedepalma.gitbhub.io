@@ -36,7 +36,8 @@ body {
     border: 1px dotted #000000;
     flex: 1;
     height: 600px;
-    padding-left: 25px;
+    padding-left: 20px;
+    padding-right: 20px;
     margin: 5px;
     cursor: pointer;
   }
@@ -45,16 +46,23 @@ body {
     border: none;
     color: black;
     padding: 16px 32px;
+    font-family:'Montserrat','Open Sans','Trebuchet MS', sans-serif;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+    letter-spacing: 2.5px;
     margin: 4px 2px;
-    transition-duration: 0.4s;
+    transition-duration: 0.7s;
     cursor: pointer;
   }
 
 .button:hover {
+    background-color: #008080;
+    color: white;
+  }
+
+  .button:active {
     background-color: black;
     color: white;
   }
@@ -65,9 +73,6 @@ body {
   margin: 10px;
 }
 
-.dots {
-  stroke: black;
-}
 .dots:hover {
   stroke: red;
 }
