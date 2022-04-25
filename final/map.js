@@ -51,7 +51,7 @@ d3.json("usa.json")
                         .attr("cx", 0)
                         .attr("cy", 0)
                         .attr("r", 0);
-                        
+
 
                     dots.merge(dotEnter)
                         .on("mousemove", function (event, d) {
