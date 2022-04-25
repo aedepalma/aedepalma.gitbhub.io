@@ -79,7 +79,7 @@ d3.json("usa.json")
                             return coords[1];
                         })
                         .style("fill", function (d) {
-                            if (d[year + '-01'] < 1500)
+                            if (d[year + '-01'] < 1600)
                                 return "#84CBCB"
                             else if (d[year + '-01'] < 2300)
                                 return "#008080"
